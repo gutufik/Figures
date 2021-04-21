@@ -10,15 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    public partial class Form2 : Form
+    public partial class RectangleForm : Form
     {
-        public Form2()
+        public RectangleForm()
         {
             InitializeComponent();
-        }
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
         }
     }
 }

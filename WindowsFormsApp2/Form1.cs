@@ -24,20 +24,38 @@ namespace WindowsFormsApp2
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
-            Form2 newForm = new Form2();
+            CircleForm newForm = new CircleForm();
             //newForm.ShowDialog();
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
                 var panel = drawPanel.CreateGraphics();
-                panel.DrawEllipse(new Pen(Color.Red, 5), 100, 100, 50, 50);
-
+                panel.DrawEllipse(new Pen(Color.Red, 5), 150, 150, 100, 100);
             }
         }
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
+            TriangleForm newForm = new TriangleForm();
+            //newForm.ShowDialog();
 
+            if (newForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var panel = drawPanel.CreateGraphics();
+                panel.DrawRectangle(new Pen(Color.Red, 5), 150, 150, 100, 100);
+            }
+        }
+
+        private void btnRectangle_Click(object sender, EventArgs e)
+        {
+            RectangleForm newForm = new RectangleForm();
+            //newForm.ShowDialog();
+
+            if (newForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var panel = drawPanel.CreateGraphics();
+                panel.DrawRectangle(new Pen(Color.Red, 5), 150, 150, 100, 100);
+            }
         }
     }
 }
