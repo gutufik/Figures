@@ -25,7 +25,7 @@ namespace WindowsFormsApp2
         private void btnCircle_Click(object sender, EventArgs e)
         {
             Form2 newForm = new Form2();
-            newForm.ShowDialog();
+            //newForm.ShowDialog();
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
@@ -33,6 +33,11 @@ namespace WindowsFormsApp2
                 panel.DrawEllipse(new Pen(Color.Red, 5), 100, 100, 50, 50);
 
             }
+        }
+
+        private void btnTriangle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
