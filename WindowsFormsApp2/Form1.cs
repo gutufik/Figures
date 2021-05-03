@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace WindowsFormsApp2
 {
@@ -41,8 +43,13 @@ namespace WindowsFormsApp2
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
+
+
                 var panel = drawPanel.CreateGraphics();
-                panel.DrawRectangle(new Pen(Color.Red, 5), 150, 150, 100, 100);
+
+                panel.DrawLine(new Pen(Color.Green, 5), 150, 200, 200, 250);
+                panel.DrawLine(new Pen(Color.Green, 5), 200, 200, 150, 200);
+                panel.DrawLine(new Pen(Color.Green, 5), 200, 200, 200, 250);
             }
         }
 
@@ -55,6 +62,30 @@ namespace WindowsFormsApp2
             {
                 var panel = drawPanel.CreateGraphics();
                 panel.DrawRectangle(new Pen(Color.Red, 5), 150, 150, 100, 100);
+            }
+        }
+
+        private void bnnLine_Click(object sender, EventArgs e)
+        {
+            LineForm newForm = new LineForm();
+            //newForm.ShowDialog();
+
+            if (newForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var panel = drawPanel.CreateGraphics();
+                panel.DrawLine(new Pen(Color.Red, 5), 200, 200, 300, 300);
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sfDialog.ShowDialog() == DialogResult.OK)
+            {
+                int width = Convert.ToInt32(drawPanel.Width);
+                int height = Convert.ToInt32(drawPanel.Height);
+                Bitmap bmp = new Bitmap(width, height);
+                drawPanel.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
+                bmp.Save($"{sfDialog.FileName}.jpeg", ImageFormat.Jpeg);
             }
         }
     }
