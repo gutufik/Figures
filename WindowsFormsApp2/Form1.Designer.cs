@@ -32,6 +32,10 @@ namespace WindowsFormsApp2
             this.btnCircle = new System.Windows.Forms.Button();
             this.drawPanel = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.lbWidth = new System.Windows.Forms.Label();
+            this.lbColor = new System.Windows.Forms.Label();
+            this.numWidth = new System.Windows.Forms.NumericUpDown();
+            this.btnColor = new System.Windows.Forms.Button();
             this.bnnLine = new System.Windows.Forms.Button();
             this.btnTriangle = new System.Windows.Forms.Button();
             this.btnRectangle = new System.Windows.Forms.Button();
@@ -42,13 +46,15 @@ namespace WindowsFormsApp2
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfDialog = new System.Windows.Forms.SaveFileDialog();
             this.ofDialog = new System.Windows.Forms.OpenFileDialog();
+            this.clrDialog = new System.Windows.Forms.ColorDialog();
             this.panelButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCircle
             // 
-            this.btnCircle.Location = new System.Drawing.Point(64, 28);
+            this.btnCircle.Location = new System.Drawing.Point(12, 28);
             this.btnCircle.Name = "btnCircle";
             this.btnCircle.Size = new System.Drawing.Size(121, 39);
             this.btnCircle.TabIndex = 0;
@@ -69,6 +75,10 @@ namespace WindowsFormsApp2
             // 
             // panelButtons
             // 
+            this.panelButtons.Controls.Add(this.lbWidth);
+            this.panelButtons.Controls.Add(this.lbColor);
+            this.panelButtons.Controls.Add(this.numWidth);
+            this.panelButtons.Controls.Add(this.btnColor);
             this.panelButtons.Controls.Add(this.bnnLine);
             this.panelButtons.Controls.Add(this.btnTriangle);
             this.panelButtons.Controls.Add(this.btnRectangle);
@@ -77,12 +87,65 @@ namespace WindowsFormsApp2
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButtons.Location = new System.Drawing.Point(0, 0);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(860, 100);
+            this.panelButtons.Size = new System.Drawing.Size(860, 113);
             this.panelButtons.TabIndex = 2;
+            // 
+            // lbWidth
+            // 
+            this.lbWidth.AutoSize = true;
+            this.lbWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lbWidth.Location = new System.Drawing.Point(605, 27);
+            this.lbWidth.Name = "lbWidth";
+            this.lbWidth.Size = new System.Drawing.Size(50, 20);
+            this.lbWidth.TabIndex = 9;
+            this.lbWidth.Text = "Width";
+            // 
+            // lbColor
+            // 
+            this.lbColor.AutoSize = true;
+            this.lbColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lbColor.Location = new System.Drawing.Point(752, 24);
+            this.lbColor.Name = "lbColor";
+            this.lbColor.Size = new System.Drawing.Size(46, 20);
+            this.lbColor.TabIndex = 8;
+            this.lbColor.Text = "Color";
+            // 
+            // numWidth
+            // 
+            this.numWidth.Location = new System.Drawing.Point(566, 59);
+            this.numWidth.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numWidth.Name = "numWidth";
+            this.numWidth.Size = new System.Drawing.Size(120, 20);
+            this.numWidth.TabIndex = 7;
+            this.numWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numWidth.ValueChanged += new System.EventHandler(this.numWidth_ValueChanged);
+            // 
+            // btnColor
+            // 
+            this.btnColor.BackColor = System.Drawing.Color.Black;
+            this.btnColor.Location = new System.Drawing.Point(756, 51);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(30, 32);
+            this.btnColor.TabIndex = 6;
+            this.btnColor.UseVisualStyleBackColor = false;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // bnnLine
             // 
-            this.bnnLine.Location = new System.Drawing.Point(645, 28);
+            this.bnnLine.Location = new System.Drawing.Point(403, 28);
             this.bnnLine.Name = "bnnLine";
             this.bnnLine.Size = new System.Drawing.Size(102, 39);
             this.bnnLine.TabIndex = 3;
@@ -92,7 +155,7 @@ namespace WindowsFormsApp2
             // 
             // btnTriangle
             // 
-            this.btnTriangle.Location = new System.Drawing.Point(468, 28);
+            this.btnTriangle.Location = new System.Drawing.Point(287, 28);
             this.btnTriangle.Name = "btnTriangle";
             this.btnTriangle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btnTriangle.Size = new System.Drawing.Size(94, 39);
@@ -103,7 +166,7 @@ namespace WindowsFormsApp2
             // 
             // btnRectangle
             // 
-            this.btnRectangle.Location = new System.Drawing.Point(261, 28);
+            this.btnRectangle.Location = new System.Drawing.Point(156, 27);
             this.btnRectangle.Name = "btnRectangle";
             this.btnRectangle.Size = new System.Drawing.Size(114, 39);
             this.btnRectangle.TabIndex = 1;
@@ -134,20 +197,20 @@ namespace WindowsFormsApp2
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -166,6 +229,7 @@ namespace WindowsFormsApp2
             this.Text = "Form1";
             this.panelButtons.ResumeLayout(false);
             this.panelButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -187,6 +251,11 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog sfDialog;
         private System.Windows.Forms.OpenFileDialog ofDialog;
+        private System.Windows.Forms.Button btnColor;
+        private System.Windows.Forms.ColorDialog clrDialog;
+        private System.Windows.Forms.NumericUpDown numWidth;
+        private System.Windows.Forms.Label lbColor;
+        private System.Windows.Forms.Label lbWidth;
     }
 }
 

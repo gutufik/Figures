@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing.Imaging;
 
 namespace WindowsFormsApp2
 {
@@ -15,12 +14,15 @@ namespace WindowsFormsApp2
     {
         private Bitmap draw;
         private Graphics paper;
+        private Pen pen;
+
 
         public Form1()
         {
             InitializeComponent();
             draw = new Bitmap(drawPanel.Width, drawPanel.Height);
             paper = Graphics.FromImage(draw);
+            pen = new Pen(Color.Black, 1);
         }
 
 
@@ -31,7 +33,7 @@ namespace WindowsFormsApp2
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
-                paper.DrawEllipse(new Pen(Color.Red, 5), 150, 150, 100, 100);
+                paper.DrawEllipse(pen, 150, 150, 100, 100);
                 drawPanel.Refresh();
             }
         }
@@ -39,41 +41,35 @@ namespace WindowsFormsApp2
         private void btnTriangle_Click(object sender, EventArgs e)
         {
             TriangleForm newForm = new TriangleForm();
-            //newForm.ShowDialog();
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
-
-
-                var panel = drawPanel.CreateGraphics();
-
-                panel.DrawLine(new Pen(Color.Green, 5), 150, 200, 200, 250);
-                panel.DrawLine(new Pen(Color.Green, 5), 200, 200, 150, 200);
-                panel.DrawLine(new Pen(Color.Green, 5), 200, 200, 200, 250);
+                paper.DrawLine(pen, 150, 200, 200, 250);
+                paper.DrawLine(pen, 200, 200, 150, 200);
+                paper.DrawLine(pen, 200, 200, 200, 250);
+                drawPanel.Refresh();
             }
         }
 
         private void btnRectangle_Click(object sender, EventArgs e)
         {
             RectangleForm newForm = new RectangleForm();
-            //newForm.ShowDialog();
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
-                var panel = drawPanel.CreateGraphics();
-                panel.DrawRectangle(new Pen(Color.Red, 5), 150, 150, 100, 100);
+                paper.DrawRectangle(pen, 150, 150, 100, 100);
+                drawPanel.Refresh();
             }
         }
 
         private void bnnLine_Click(object sender, EventArgs e)
         {
             LineForm newForm = new LineForm();
-            //newForm.ShowDialog();
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
-                var panel = drawPanel.CreateGraphics();
-                panel.DrawLine(new Pen(Color.Red, 5), 200, 200, 300, 300);
+                paper.DrawLine(pen, 200, 200, 300, 300);
+                drawPanel.Refresh();
             }
         }
 
@@ -88,7 +84,6 @@ namespace WindowsFormsApp2
 
         private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            var pen = new Pen(Color.DarkOliveGreen, 5);
             paper.DrawEllipse(pen, e.X, e.Y, 50, 50);
             drawPanel.Refresh();
         }
@@ -112,5 +107,20 @@ namespace WindowsFormsApp2
                 img.Dispose();
             }
         }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            if (clrDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                btnColor.BackColor = clrDialog.Color;
+                pen.Color = clrDialog.Color;
+            }
+        }
+
+        private void numWidth_ValueChanged(object sender, EventArgs e)
+        {
+            pen.Width = (int)numWidth.Value;
+        }
+
     }
 }
