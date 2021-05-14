@@ -41,12 +41,13 @@ namespace WindowsFormsApp2
             this.btnRectangle = new System.Windows.Forms.Button();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBtnClear = new System.Windows.Forms.ToolStripMenuItem();
             this.sfDialog = new System.Windows.Forms.SaveFileDialog();
             this.ofDialog = new System.Windows.Forms.OpenFileDialog();
             this.clrDialog = new System.Windows.Forms.ColorDialog();
+            this.btnPen = new System.Windows.Forms.Button();
             this.panelButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             this.mainMenu.SuspendLayout();
@@ -56,7 +57,7 @@ namespace WindowsFormsApp2
             // 
             this.btnCircle.Location = new System.Drawing.Point(12, 28);
             this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(121, 39);
+            this.btnCircle.Size = new System.Drawing.Size(105, 38);
             this.btnCircle.TabIndex = 0;
             this.btnCircle.Text = "Circle";
             this.btnCircle.UseVisualStyleBackColor = true;
@@ -72,9 +73,13 @@ namespace WindowsFormsApp2
             this.drawPanel.TabIndex = 1;
             this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
             this.drawPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseClick);
+            this.drawPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseDown);
+            this.drawPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseMove);
+            this.drawPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseUp);
             // 
             // panelButtons
             // 
+            this.panelButtons.Controls.Add(this.btnPen);
             this.panelButtons.Controls.Add(this.lbWidth);
             this.panelButtons.Controls.Add(this.lbColor);
             this.panelButtons.Controls.Add(this.numWidth);
@@ -112,7 +117,7 @@ namespace WindowsFormsApp2
             // 
             // numWidth
             // 
-            this.numWidth.Location = new System.Drawing.Point(566, 59);
+            this.numWidth.Location = new System.Drawing.Point(609, 59);
             this.numWidth.Maximum = new decimal(new int[] {
             50,
             0,
@@ -145,9 +150,9 @@ namespace WindowsFormsApp2
             // 
             // bnnLine
             // 
-            this.bnnLine.Location = new System.Drawing.Point(403, 28);
+            this.bnnLine.Location = new System.Drawing.Point(373, 28);
             this.bnnLine.Name = "bnnLine";
-            this.bnnLine.Size = new System.Drawing.Size(102, 39);
+            this.bnnLine.Size = new System.Drawing.Size(83, 39);
             this.bnnLine.TabIndex = 3;
             this.bnnLine.Text = "Line";
             this.bnnLine.UseVisualStyleBackColor = true;
@@ -155,10 +160,10 @@ namespace WindowsFormsApp2
             // 
             // btnTriangle
             // 
-            this.btnTriangle.Location = new System.Drawing.Point(287, 28);
+            this.btnTriangle.Location = new System.Drawing.Point(257, 27);
             this.btnTriangle.Name = "btnTriangle";
             this.btnTriangle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnTriangle.Size = new System.Drawing.Size(94, 39);
+            this.btnTriangle.Size = new System.Drawing.Size(85, 40);
             this.btnTriangle.TabIndex = 2;
             this.btnTriangle.Text = "Triangle";
             this.btnTriangle.UseVisualStyleBackColor = true;
@@ -166,9 +171,9 @@ namespace WindowsFormsApp2
             // 
             // btnRectangle
             // 
-            this.btnRectangle.Location = new System.Drawing.Point(156, 27);
+            this.btnRectangle.Location = new System.Drawing.Point(139, 27);
             this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.Size = new System.Drawing.Size(114, 39);
+            this.btnRectangle.Size = new System.Drawing.Size(92, 39);
             this.btnRectangle.TabIndex = 1;
             this.btnRectangle.Text = "Rectangle";
             this.btnRectangle.UseVisualStyleBackColor = true;
@@ -187,36 +192,47 @@ namespace WindowsFormsApp2
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.newToolStripMenuItem,
-            this.openToolStripMenuItem});
+            this.menuBtnClear});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.menuBtnOpen_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.menuBtnSave_Click);
+            // 
+            // menuBtnClear
+            // 
+            this.menuBtnClear.Name = "menuBtnClear";
+            this.menuBtnClear.Size = new System.Drawing.Size(180, 22);
+            this.menuBtnClear.Text = "Clear";
+            this.menuBtnClear.Click += new System.EventHandler(this.menuBtnClear_Click);
             // 
             // ofDialog
             // 
             this.ofDialog.FileName = "openFileDialog1";
+            // 
+            // btnPen
+            // 
+            this.btnPen.Location = new System.Drawing.Point(511, 56);
+            this.btnPen.Name = "btnPen";
+            this.btnPen.Size = new System.Drawing.Size(75, 23);
+            this.btnPen.TabIndex = 10;
+            this.btnPen.Text = "Pen";
+            this.btnPen.UseVisualStyleBackColor = true;
+            this.btnPen.Click += new System.EventHandler(this.btnPen_Click);
             // 
             // Form1
             // 
@@ -247,7 +263,7 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuBtnClear;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog sfDialog;
         private System.Windows.Forms.OpenFileDialog ofDialog;
@@ -256,6 +272,7 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.NumericUpDown numWidth;
         private System.Windows.Forms.Label lbColor;
         private System.Windows.Forms.Label lbWidth;
+        private System.Windows.Forms.Button btnPen;
     }
 }
 
