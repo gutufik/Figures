@@ -35,15 +35,15 @@ namespace WindowsFormsApp2
             this.bnnLine = new System.Windows.Forms.Button();
             this.btnTriangle = new System.Windows.Forms.Button();
             this.btnRectangle = new System.Windows.Forms.Button();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfDialog = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ofDialog = new System.Windows.Forms.OpenFileDialog();
             this.panelButtons.SuspendLayout();
-            this.menuStrip2.SuspendLayout();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCircle
@@ -65,6 +65,7 @@ namespace WindowsFormsApp2
             this.drawPanel.Size = new System.Drawing.Size(860, 486);
             this.drawPanel.TabIndex = 1;
             this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
+            this.drawPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseClick);
             // 
             // panelButtons
             // 
@@ -72,7 +73,7 @@ namespace WindowsFormsApp2
             this.panelButtons.Controls.Add(this.btnTriangle);
             this.panelButtons.Controls.Add(this.btnRectangle);
             this.panelButtons.Controls.Add(this.btnCircle);
-            this.panelButtons.Controls.Add(this.menuStrip2);
+            this.panelButtons.Controls.Add(this.mainMenu);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButtons.Location = new System.Drawing.Point(0, 0);
             this.panelButtons.Name = "panelButtons";
@@ -110,15 +111,15 @@ namespace WindowsFormsApp2
             this.btnRectangle.UseVisualStyleBackColor = true;
             this.btnRectangle.Click += new System.EventHandler(this.btnRectangle_Click);
             // 
-            // menuStrip2
+            // mainMenu
             // 
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(860, 24);
-            this.menuStrip2.TabIndex = 5;
-            this.menuStrip2.Text = "menuStrip2";
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(860, 24);
+            this.mainMenu.TabIndex = 5;
+            this.mainMenu.Text = "menuStrip2";
             // 
             // fileToolStripMenuItem
             // 
@@ -148,10 +149,11 @@ namespace WindowsFormsApp2
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // openFileDialog1
+            // ofDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.ofDialog.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -164,8 +166,8 @@ namespace WindowsFormsApp2
             this.Text = "Form1";
             this.panelButtons.ResumeLayout(false);
             this.panelButtons.PerformLayout();
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -178,13 +180,13 @@ namespace WindowsFormsApp2
         private System.Windows.Forms.Button bnnLine;
         private System.Windows.Forms.Button btnTriangle;
         private System.Windows.Forms.Button btnRectangle;
-        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog sfDialog;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog ofDialog;
     }
 }
 

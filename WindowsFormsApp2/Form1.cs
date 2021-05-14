@@ -7,22 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
+        private Bitmap draw;
+        private Graphics paper;
+
         public Form1()
         {
             InitializeComponent();
+            draw = new Bitmap(drawPanel.Width, drawPanel.Height);
+            paper = Graphics.FromImage(draw);
         }
 
-        private void drawPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
@@ -31,8 +31,8 @@ namespace WindowsFormsApp2
 
             if (newForm.ShowDialog(this) == DialogResult.OK)
             {
-                var panel = drawPanel.CreateGraphics();
-                panel.DrawEllipse(new Pen(Color.Red, 5), 150, 150, 100, 100);
+                paper.DrawEllipse(new Pen(Color.Red, 5), 150, 150, 100, 100);
+                drawPanel.Refresh();
             }
         }
 
@@ -79,13 +79,37 @@ namespace WindowsFormsApp2
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (sfDialog.ShowDialog() == DialogResult.OK)
+            sfDialog.Filter = "PNG Image | *.png";
+            if (sfDialog.ShowDialog(this) == DialogResult.OK)
             {
-                int width = Convert.ToInt32(drawPanel.Width);
-                int height = Convert.ToInt32(drawPanel.Height);
-                Bitmap bmp = new Bitmap(width, height);
-                drawPanel.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
-                bmp.Save($"{sfDialog.FileName}.jpeg", ImageFormat.Jpeg);
+                draw.Save(sfDialog.FileName);
+            }
+        }
+
+        private void drawPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            var pen = new Pen(Color.DarkOliveGreen, 5);
+            paper.DrawEllipse(pen, e.X, e.Y, 50, 50);
+            drawPanel.Refresh();
+        }
+
+        private void drawPanel_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(draw, new Point(0, 0));
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ofDialog.Filter = "PNG Image | *.png";
+
+            if (ofDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                var img = new Bitmap(ofDialog.FileName);
+                draw.Dispose();
+                draw = new Bitmap(img);
+                paper = Graphics.FromImage(draw);
+                drawPanel.Refresh();
+                img.Dispose();
             }
         }
     }
