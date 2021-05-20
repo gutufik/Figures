@@ -7,54 +7,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinDraw;
 
 namespace MyDrawing
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private Bitmap draw;
         private Graphics paper;
         private Pen pen;
-        private string figure;
+        private List<Figure> figures;
 
-        private bool drawWithPen;
-        private Point lastPoint;
-        private bool isMouseDown;
-
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             draw = new Bitmap(drawPanel.Width, drawPanel.Height);
             paper = Graphics.FromImage(draw);
             pen = new Pen(Color.Black, 1);
-            lastPoint = Point.Empty;
-            isMouseDown = new Boolean();
-            drawWithPen = false;
+            figures = new List<Figure>();
         }
 
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
-            figure = "Circle";
-            drawWithPen = false;
+            var circle = new Circle((int)x1Num.Value, (int)y1Num.Value,
+                                (int)x2Num.Value);
+            circle.Draw(paper, pen);
+            figures.Add(circle);
+            drawPanel.Refresh();
         }
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
-            figure = "Triangle";
-            drawWithPen = false;
+            var triangle = new Triangle((int)x1Num.Value, (int)y1Num.Value,
+                                (int)x2Num.Value, (int)y2Num.Value);
+            triangle.Draw(paper, pen);
+            figures.Add(triangle);
+            drawPanel.Refresh();
         }
 
         private void btnRectangle_Click(object sender, EventArgs e)
         {
-            figure = "Rectangle";
-            drawWithPen = false;
+            var rectangle = new MyRectangle((int)x1Num.Value, (int)y1Num.Value,
+                                (int)x2Num.Value - (int)x1Num.Value,
+                                (int)y2Num.Value - (int)y1Num.Value);
+            rectangle.Draw(paper, pen);
+            figures.Add(rectangle);
+            drawPanel.Refresh();
         }
 
         private void bnnLine_Click(object sender, EventArgs e)
         {
-            figure = "Line";
-            drawWithPen = false;
+            var line = new Line((int)x1Num.Value, (int)y1Num.Value, 
+                                (int)x2Num.Value, (int)y2Num.Value);
+            line.Draw(paper, pen);
+            figures.Add(line);
+            drawPanel.Refresh();
         }
 
         private void menuBtnSave_Click(object sender, EventArgs e)
@@ -64,28 +72,6 @@ namespace MyDrawing
             {
                 draw.Save(sfDialog.FileName);
             }
-        }
-
-        private void drawPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-            switch (figure)
-            {
-                case "Circle":
-                    paper.DrawEllipse(pen, e.X, e.Y, 50, 50);
-                    break;
-                case "Line":
-                    paper.DrawLine(pen, e.X, e.Y, e.X + 50, e.Y + 50);
-                    break;
-                case "Rectangle":
-                    paper.DrawRectangle(pen, e.X, e.Y, 50, 50);
-                    break;
-                case "Triangle":
-                    paper.DrawLine(pen, e.X, e.Y + 100, e.X + 50, e.Y);
-                    paper.DrawLine(pen, e.X + 50, e.Y, e.X + 100, e.Y + 100);
-                    paper.DrawLine(pen, e.X + 100, e.Y + 100, e.X, e.Y + 100);
-                    break;
-            }
-            drawPanel.Refresh();
         }
 
         private void drawPanel_Paint(object sender, PaintEventArgs e)
@@ -126,33 +112,9 @@ namespace MyDrawing
         {
             draw = new Bitmap(drawPanel.Width, drawPanel.Height);
             paper = Graphics.FromImage(draw);
+            figures.Clear();
+
             drawPanel.Refresh();
-        }
-
-        private void drawPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            isMouseDown = true;
-            lastPoint = e.Location;
-        }
-
-        private void drawPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            isMouseDown = false;
-        }
-
-        private void drawPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isMouseDown && drawWithPen)
-            {
-                paper.DrawLine(pen, lastPoint.X, lastPoint.Y, e.X, e.Y);
-                lastPoint = e.Location;
-                drawPanel.Refresh();
-            }
-        }
-
-        private void btnPen_Click(object sender, EventArgs e)
-        {
-            drawWithPen = true;
         }
     }
 }

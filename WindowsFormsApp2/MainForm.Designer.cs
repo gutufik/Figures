@@ -1,7 +1,7 @@
 ﻿
 namespace MyDrawing
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,16 @@ namespace MyDrawing
             this.btnCircle = new System.Windows.Forms.Button();
             this.drawPanel = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
-            this.btnPen = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.y1Label = new System.Windows.Forms.Label();
+            this.x2LAbel = new System.Windows.Forms.Label();
+            this.y2label1 = new System.Windows.Forms.Label();
+            this.paramLabel = new System.Windows.Forms.Label();
+            this.x1Label = new System.Windows.Forms.Label();
+            this.y2Num = new System.Windows.Forms.NumericUpDown();
+            this.x1Num = new System.Windows.Forms.NumericUpDown();
+            this.x2Num = new System.Windows.Forms.NumericUpDown();
+            this.y1Num = new System.Windows.Forms.NumericUpDown();
             this.lbWidth = new System.Windows.Forms.Label();
             this.lbColor = new System.Windows.Forms.Label();
             this.numWidth = new System.Windows.Forms.NumericUpDown();
@@ -44,11 +53,15 @@ namespace MyDrawing
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBtnClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBtnNew = new System.Windows.Forms.ToolStripMenuItem();
             this.sfDialog = new System.Windows.Forms.SaveFileDialog();
             this.ofDialog = new System.Windows.Forms.OpenFileDialog();
             this.clrDialog = new System.Windows.Forms.ColorDialog();
             this.panelButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.y2Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.x1Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.x2Num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.y1Num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).BeginInit();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +70,7 @@ namespace MyDrawing
             // 
             this.btnCircle.Location = new System.Drawing.Point(12, 28);
             this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(105, 38);
+            this.btnCircle.Size = new System.Drawing.Size(56, 38);
             this.btnCircle.TabIndex = 0;
             this.btnCircle.Text = "Circle";
             this.btnCircle.UseVisualStyleBackColor = true;
@@ -72,14 +85,19 @@ namespace MyDrawing
             this.drawPanel.Size = new System.Drawing.Size(860, 486);
             this.drawPanel.TabIndex = 1;
             this.drawPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.drawPanel_Paint);
-            this.drawPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseClick);
-            this.drawPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseDown);
-            this.drawPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseMove);
-            this.drawPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseUp);
             // 
             // panelButtons
             // 
-            this.panelButtons.Controls.Add(this.btnPen);
+            this.panelButtons.Controls.Add(this.clearButton);
+            this.panelButtons.Controls.Add(this.y1Label);
+            this.panelButtons.Controls.Add(this.x2LAbel);
+            this.panelButtons.Controls.Add(this.y2label1);
+            this.panelButtons.Controls.Add(this.paramLabel);
+            this.panelButtons.Controls.Add(this.x1Label);
+            this.panelButtons.Controls.Add(this.y2Num);
+            this.panelButtons.Controls.Add(this.x1Num);
+            this.panelButtons.Controls.Add(this.x2Num);
+            this.panelButtons.Controls.Add(this.y1Num);
             this.panelButtons.Controls.Add(this.lbWidth);
             this.panelButtons.Controls.Add(this.lbColor);
             this.panelButtons.Controls.Add(this.numWidth);
@@ -92,24 +110,137 @@ namespace MyDrawing
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelButtons.Location = new System.Drawing.Point(0, 0);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(860, 113);
+            this.panelButtons.Size = new System.Drawing.Size(860, 157);
             this.panelButtons.TabIndex = 2;
             // 
-            // btnPen
+            // clearButton
             // 
-            this.btnPen.Location = new System.Drawing.Point(511, 56);
-            this.btnPen.Name = "btnPen";
-            this.btnPen.Size = new System.Drawing.Size(75, 23);
-            this.btnPen.TabIndex = 10;
-            this.btnPen.Text = "Pen";
-            this.btnPen.UseVisualStyleBackColor = true;
-            this.btnPen.Click += new System.EventHandler(this.btnPen_Click);
+            this.clearButton.Location = new System.Drawing.Point(111, 127);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(75, 23);
+            this.clearButton.TabIndex = 21;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.menuBtnClear_Click);
+            // 
+            // y1Label
+            // 
+            this.y1Label.AutoSize = true;
+            this.y1Label.Location = new System.Drawing.Point(309, 75);
+            this.y1Label.Name = "y1Label";
+            this.y1Label.Size = new System.Drawing.Size(20, 13);
+            this.y1Label.TabIndex = 19;
+            this.y1Label.Text = "Y1";
+            // 
+            // x2LAbel
+            // 
+            this.x2LAbel.AutoSize = true;
+            this.x2LAbel.Location = new System.Drawing.Point(309, 106);
+            this.x2LAbel.Name = "x2LAbel";
+            this.x2LAbel.Size = new System.Drawing.Size(20, 13);
+            this.x2LAbel.TabIndex = 18;
+            this.x2LAbel.Text = "X2";
+            // 
+            // y2label1
+            // 
+            this.y2label1.AutoSize = true;
+            this.y2label1.Location = new System.Drawing.Point(309, 132);
+            this.y2label1.Name = "y2label1";
+            this.y2label1.Size = new System.Drawing.Size(20, 13);
+            this.y2label1.TabIndex = 17;
+            this.y2label1.Text = "Y2";
+            // 
+            // paramLabel
+            // 
+            this.paramLabel.AutoSize = true;
+            this.paramLabel.Location = new System.Drawing.Point(384, 27);
+            this.paramLabel.Name = "paramLabel";
+            this.paramLabel.Size = new System.Drawing.Size(60, 13);
+            this.paramLabel.TabIndex = 16;
+            this.paramLabel.Text = "Parameters";
+            // 
+            // x1Label
+            // 
+            this.x1Label.AutoSize = true;
+            this.x1Label.Location = new System.Drawing.Point(309, 49);
+            this.x1Label.Name = "x1Label";
+            this.x1Label.Size = new System.Drawing.Size(20, 13);
+            this.x1Label.TabIndex = 15;
+            this.x1Label.Text = "X1";
+            // 
+            // y2Num
+            // 
+            this.y2Num.Location = new System.Drawing.Point(362, 125);
+            this.y2Num.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.y2Num.Minimum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.y2Num.Name = "y2Num";
+            this.y2Num.Size = new System.Drawing.Size(120, 20);
+            this.y2Num.TabIndex = 14;
+            this.y2Num.Value = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            // 
+            // x1Num
+            // 
+            this.x1Num.Location = new System.Drawing.Point(362, 47);
+            this.x1Num.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.x1Num.Name = "x1Num";
+            this.x1Num.Size = new System.Drawing.Size(120, 20);
+            this.x1Num.TabIndex = 13;
+            // 
+            // x2Num
+            // 
+            this.x2Num.Location = new System.Drawing.Point(362, 99);
+            this.x2Num.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.x2Num.Name = "x2Num";
+            this.x2Num.Size = new System.Drawing.Size(120, 20);
+            this.x2Num.TabIndex = 12;
+            // 
+            // y1Num
+            // 
+            this.y1Num.Location = new System.Drawing.Point(362, 73);
+            this.y1Num.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.y1Num.Minimum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.y1Num.Name = "y1Num";
+            this.y1Num.Size = new System.Drawing.Size(120, 20);
+            this.y1Num.TabIndex = 11;
+            this.y1Num.Value = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
             // 
             // lbWidth
             // 
             this.lbWidth.AutoSize = true;
             this.lbWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lbWidth.Location = new System.Drawing.Point(605, 27);
+            this.lbWidth.Location = new System.Drawing.Point(668, 28);
             this.lbWidth.Name = "lbWidth";
             this.lbWidth.Size = new System.Drawing.Size(50, 20);
             this.lbWidth.TabIndex = 9;
@@ -127,7 +258,7 @@ namespace MyDrawing
             // 
             // numWidth
             // 
-            this.numWidth.Location = new System.Drawing.Point(609, 59);
+            this.numWidth.Location = new System.Drawing.Point(630, 59);
             this.numWidth.Maximum = new decimal(new int[] {
             50,
             0,
@@ -160,9 +291,9 @@ namespace MyDrawing
             // 
             // bnnLine
             // 
-            this.bnnLine.Location = new System.Drawing.Point(373, 28);
+            this.bnnLine.Location = new System.Drawing.Point(206, 28);
             this.bnnLine.Name = "bnnLine";
-            this.bnnLine.Size = new System.Drawing.Size(83, 39);
+            this.bnnLine.Size = new System.Drawing.Size(41, 38);
             this.bnnLine.TabIndex = 3;
             this.bnnLine.Text = "Line";
             this.bnnLine.UseVisualStyleBackColor = true;
@@ -170,10 +301,10 @@ namespace MyDrawing
             // 
             // btnTriangle
             // 
-            this.btnTriangle.Location = new System.Drawing.Point(257, 27);
+            this.btnTriangle.Location = new System.Drawing.Point(147, 28);
             this.btnTriangle.Name = "btnTriangle";
             this.btnTriangle.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.btnTriangle.Size = new System.Drawing.Size(85, 40);
+            this.btnTriangle.Size = new System.Drawing.Size(53, 38);
             this.btnTriangle.TabIndex = 2;
             this.btnTriangle.Text = "Triangle";
             this.btnTriangle.UseVisualStyleBackColor = true;
@@ -181,9 +312,9 @@ namespace MyDrawing
             // 
             // btnRectangle
             // 
-            this.btnRectangle.Location = new System.Drawing.Point(139, 27);
+            this.btnRectangle.Location = new System.Drawing.Point(74, 27);
             this.btnRectangle.Name = "btnRectangle";
-            this.btnRectangle.Size = new System.Drawing.Size(92, 39);
+            this.btnRectangle.Size = new System.Drawing.Size(67, 39);
             this.btnRectangle.TabIndex = 1;
             this.btnRectangle.Text = "Rectangle";
             this.btnRectangle.UseVisualStyleBackColor = true;
@@ -204,7 +335,7 @@ namespace MyDrawing
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.menuBtnClear});
+            this.menuBtnNew});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -223,12 +354,12 @@ namespace MyDrawing
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.menuBtnSave_Click);
             // 
-            // menuBtnClear
+            // menuBtnNew
             // 
-            this.menuBtnClear.Name = "menuBtnClear";
-            this.menuBtnClear.Size = new System.Drawing.Size(103, 22);
-            this.menuBtnClear.Text = "Clear";
-            this.menuBtnClear.Click += new System.EventHandler(this.menuBtnClear_Click);
+            this.menuBtnNew.Name = "menuBtnNew";
+            this.menuBtnNew.Size = new System.Drawing.Size(103, 22);
+            this.menuBtnNew.Text = "New";
+            this.menuBtnNew.Click += new System.EventHandler(this.menuBtnClear_Click);
             // 
             // ofDialog
             // 
@@ -245,6 +376,10 @@ namespace MyDrawing
             this.Text = "Form1";
             this.panelButtons.ResumeLayout(false);
             this.panelButtons.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.y2Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.x1Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.x2Num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.y1Num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWidth)).EndInit();
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
@@ -263,7 +398,7 @@ namespace MyDrawing
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menuBtnClear;
+        private System.Windows.Forms.ToolStripMenuItem menuBtnNew;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog sfDialog;
         private System.Windows.Forms.OpenFileDialog ofDialog;
@@ -272,7 +407,16 @@ namespace MyDrawing
         private System.Windows.Forms.NumericUpDown numWidth;
         private System.Windows.Forms.Label lbColor;
         private System.Windows.Forms.Label lbWidth;
-        private System.Windows.Forms.Button btnPen;
+        private System.Windows.Forms.NumericUpDown y1Num;
+        private System.Windows.Forms.Label paramLabel;
+        private System.Windows.Forms.Label x1Label;
+        private System.Windows.Forms.NumericUpDown y2Num;
+        private System.Windows.Forms.NumericUpDown x1Num;
+        private System.Windows.Forms.NumericUpDown x2Num;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Label y1Label;
+        private System.Windows.Forms.Label x2LAbel;
+        private System.Windows.Forms.Label y2label1;
     }
 }
 
